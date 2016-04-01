@@ -1,0 +1,13 @@
+{
+    "name": "firetracker/php-sdk",
+    "authors": [
+        {
+            "name": "Elwadi Amine",
+            "email": "elwadiamine@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+      "php": ">=5.3.0"
+    }
+}
