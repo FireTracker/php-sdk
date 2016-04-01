@@ -1,5 +1,6 @@
 {
     "name": "firetracker/php-sdk",
+    "version": "0.0.1",
     "authors": [
         {
             "name": "Elwadi Amine",
