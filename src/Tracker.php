@@ -23,7 +23,7 @@ class Tracker
       echo "Tracker Fired";
   }
   public static function Fire(Exception $_x_=null,$level=self::$_FIRE_LEVEL_DEBUG,$env=self::$_FIRE_ENV_DEVELOPMENT){
-    if(!defined(FT_API_KEY)||defined(FT_APP_KEY)){
+    if(!defined(FT_API_KEY)||!defined(FT_APP_KEY)){
       return false;
     }
     echo "Fire Exception".self::$_FIRE_LEVEL_DEBUG;
