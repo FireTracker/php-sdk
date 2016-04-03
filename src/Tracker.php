@@ -22,13 +22,13 @@ class Tracker
   public static function test(){
       echo "Tracker Fired";
   }
-  public static function Fire(Exception $_x_=null,$level=Tracker::$_FIRE_LEVEL_DEBUG,$env=Tracker::$_FIRE_ENV_DEVELOPMENT){
+  public static function Fire(Exception $_x_=null,$level=null,$env=null){
     if(!defined(FT_API_KEY)||!defined(FT_APP_KEY)){
       return false;
     }
     echo "Fire Exception".self::$_FIRE_LEVEL_DEBUG;
   }
-  public static function Fire($code="",$message="",$file="";$line="",$level=Tracker::$_FIRE_LEVEL_DEBUG,$env=Tracker::$_FIRE_ENV_DEVELOPMENT){
+  public static function Fire($code="",$message="",$file="";$line="",$level=null,$env=null){
 
   }
 }
