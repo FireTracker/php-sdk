@@ -28,7 +28,7 @@ class Tracker
     }
     echo "Fire Exception".self::$_FIRE_LEVEL_DEBUG;
   }
-  public static function Fire($code="",$message="",$file="",$line="",$level=null,$env=null){
+  /*public static function Fire($code="",$message="",$file="",$line="",$level=null,$env=null){
 
-  }
+  }*/
 }
