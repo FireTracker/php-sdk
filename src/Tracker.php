@@ -22,7 +22,7 @@ class Tracker
   public static function test(){
       echo "Tracker Fired";
   }
-  public static function Fire(Exception $_x_=null,$level=null,$env=null){
+  public static function Fire(Exception $_x_,$level=null,$env=null){
     if(!defined(FT_API_KEY)||!defined(FT_APP_KEY)){
       return false;
     }
