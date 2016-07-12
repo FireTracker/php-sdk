@@ -1,2 +1,0 @@
-# php-sdk
-PHP SDK
