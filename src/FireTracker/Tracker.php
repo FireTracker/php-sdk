@@ -32,6 +32,7 @@ class Tracker
   }
 
   /**
+   * Main function to fire logs
    * @param $level
    * @param string $message
    * @param string $context
@@ -55,7 +56,7 @@ class Tracker
       self::$_FIRE_ENV_PRODUCTION,
       self::$_FIRE_ENV_STAGING,
     );
-
+    // check env var value
     if(isset($GLOBALS[self::$_FIRE_ENV_VAR_NAME])){
       if(in_array($GLOBALS[self::$_FIRE_ENV_VAR_NAME],$targetEnv)){
         $env=$GLOBALS[self::$_FIRE_ENV_VAR_NAME];
@@ -69,7 +70,7 @@ class Tracker
         'fire_key'=>$userKey,
         'fire_secret'=>$userSecret,
     );
-    Request::post(self::$_FIRE_ENDPOINT,$headers,$query);
+    return Request::post(self::$_FIRE_ENDPOINT,$headers,$query);
   }
 
   /**
@@ -83,56 +84,63 @@ class Tracker
   /**
    * @param string $message
    * @param string $context
+   * @return mixed
    */
   public static function FireDebug($message="",$context=""){
-    self::Fire(self::$_FIRE_LEVEL_DEBUG,$message,$context);
+    return self::Fire(self::$_FIRE_LEVEL_DEBUG,$message,$context);
   }
 
   /**
    * @param string $message
    * @param string $context
+   * @return mixed
    */
   public static function FireInfo($message="",$context=""){
-    self::Fire(self::$_FIRE_LEVEL_INFO,$message,$context);
+      return self::Fire(self::$_FIRE_LEVEL_INFO,$message,$context);
   }
 
   /**
    * @param string $message
    * @param string $context
+   * @return mixed
    */
   public static function FireNotice($message="",$context=""){
-    self::Fire(self::$_FIRE_LEVEL_NOTICE,$message,$context);
+    return self::Fire(self::$_FIRE_LEVEL_NOTICE,$message,$context);
   }
 
   /**
    * @param string $message
    * @param string $context
+   * @return mixed
    */
   public static function FireWarning($message="",$context=""){
-    self::Fire(self::$_FIRE_LEVEL_WARNING,$message,$context);
+   return self::Fire(self::$_FIRE_LEVEL_WARNING,$message,$context);
   }
 
   /**
    * @param string $message
    * @param string $context
+   * @return mixed
    */
   public static function FireError($message="",$context=""){
-    self::Fire(self::$_FIRE_LEVEL_ERROR,$message,$context);
+    return self::Fire(self::$_FIRE_LEVEL_ERROR,$message,$context);
   }
 
   /**
    * @param string $message
    * @param string $context
+   * @return mixed
    */
   public static function FireAlert($message="",$context=""){
-    self::Fire(self::$_FIRE_LEVEL_ALERT,$message,$context);
+    return self::Fire(self::$_FIRE_LEVEL_ALERT,$message,$context);
   }
 
   /**
    * @param string $message
    * @param string $context
+   * @return mixed
    */
   public static function FireCritical($message="",$context=""){
-    self::Fire(self::$_FIRE_LEVEL_CRITICAL,$message,$context);
+    return self::Fire(self::$_FIRE_LEVEL_CRITICAL,$message,$context);
   }
 }
