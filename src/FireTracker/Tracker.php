@@ -4,7 +4,7 @@ namespace FireTracker;
 use Unirest\Request;
 
 /**
- *
+ * FireTracker class
  */
 class Tracker
 {
