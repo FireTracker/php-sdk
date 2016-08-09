@@ -46,6 +46,8 @@ class Tracker
     public static $_FIRE_INPUT_TRAIT="fire_trait";
     public static $_FIRE_INPUT_NAMESPACE="fire_namespace";
 
+    protected static $_FIRE_HASH_ALGO="sha256";
+
     /**
      * Fire Test Function
      */
@@ -58,7 +60,6 @@ class Tracker
             self::$_FIRE_INPUT_CONTEXT => "CONTEXT",
             self::$_FIRE_INPUT_ENV => "ENV",
             self::$_FIRE_INPUT_KEY => "KEY",
-            self::$_FIRE_INPUT_SECRET=> "SECRET",
             self::$_FIRE_INPUT_HOST=>php_uname(),
             self::$_FIRE_INPUT_LOCAL_IP=>$_SERVER["SERVER_ADDR"],
             self::$_FIRE_INPUT_REMOTE_IP=>$_SERVER["REMOTE_ADDR"],
@@ -70,7 +71,8 @@ class Tracker
             self::$_FIRE_INPUT_TRAIT=>__TRAIT__,
             self::$_FIRE_INPUT_NAMESPACE=>__NAMESPACE__,
         );
-        print_r($testQuery);
+        $testQuery[self::$_FIRE_INPUT_SECRET]=self::fireHash($testQuery);
+        return $testQuery;
     }
 
     /**
@@ -111,7 +113,6 @@ class Tracker
             self::$_FIRE_INPUT_CONTEXT => $context,
             self::$_FIRE_INPUT_ENV => $env,
             self::$_FIRE_INPUT_KEY => $userKey,
-            self::$_FIRE_INPUT_SECRET=> $userSecret,
             self::$_FIRE_INPUT_HOST=>php_uname(),
             self::$_FIRE_INPUT_LOCAL_IP=>$_SERVER["SERVER_ADDR"],
             self::$_FIRE_INPUT_REMOTE_IP=>$_SERVER["REMOTE_ADDR"],
@@ -203,5 +204,32 @@ class Tracker
     public static function FireCritical($message = "", $context = "")
     {
         return self::Fire(self::$_FIRE_LEVEL_CRITICAL, $message, $context);
+    }
+
+    protected static function fireHash($query){
+        $userSecret = (isset($GLOBALS[self::$_FIRE_USER_SECRET])) ? $GLOBALS[self::$_FIRE_USER_SECRET] : null;
+        $response=false;
+        if($userSecret==null){
+            return $response;
+        }
+        $data="";
+        $data.=(isset($query[self::$_FIRE_INPUT_LEVEL]))?$query[self::$_FIRE_INPUT_LEVEL]:"$";
+        $data.=(isset($query[self::$_FIRE_INPUT_MESSAGE]))?$query[self::$_FIRE_INPUT_MESSAGE]:"$";
+        $data.=(isset($query[self::$_FIRE_INPUT_CONTEXT]))?$query[self::$_FIRE_INPUT_CONTEXT]:"$";
+        $data.=(isset($query[self::$_FIRE_INPUT_ENV]))?$query[self::$_FIRE_INPUT_ENV]:"$";
+        $data.=(isset($query[self::$_FIRE_INPUT_KEY]))?$query[self::$_FIRE_INPUT_KEY]:"$";
+        $data.=(isset($query[self::$_FIRE_INPUT_HOST]))?$query[self::$_FIRE_INPUT_HOST]:"$";
+        $data.=(isset($query[self::$_FIRE_INPUT_LOCAL_IP]))?$query[self::$_FIRE_INPUT_LOCAL_IP]:"$";
+        $data.=(isset($query[self::$_FIRE_INPUT_REMOTE_IP]))?$query[self::$_FIRE_INPUT_REMOTE_IP]:"$";
+        $data.=(isset($query[self::$_FIRE_INPUT_LINE]))?$query[self::$_FIRE_INPUT_LINE]:"$";
+        $data.=(isset($query[self::$_FIRE_INPUT_FILE]))?$query[self::$_FIRE_INPUT_FILE]:"$";
+        $data.=(isset($query[self::$_FIRE_INPUT_FUNCTION]))?$query[self::$_FIRE_INPUT_FUNCTION]:"$";
+        $data.=(isset($query[self::$_FIRE_INPUT_METHODE]))?$query[self::$_FIRE_INPUT_METHODE]:"$";
+        $data.=(isset($query[self::$_FIRE_INPUT_CLASS]))?$query[self::$_FIRE_INPUT_CLASS]:"$";
+        $data.=(isset($query[self::$_FIRE_INPUT_TRAIT]))?$query[self::$_FIRE_INPUT_TRAIT]:"$";
+        $data.=(isset($query[self::$_FIRE_INPUT_NAMESPACE]))?$query[self::$_FIRE_INPUT_NAMESPACE]:"$";
+        $data.=$userSecret;
+        $response=hash(self::$_FIRE_HASH_ALGO,$data);
+
     }
 }
