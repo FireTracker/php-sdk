@@ -230,6 +230,6 @@ class Tracker
         $data.=(isset($query[self::$_FIRE_INPUT_NAMESPACE]))?$query[self::$_FIRE_INPUT_NAMESPACE]:"$";
         $data.=$userSecret;
         $response=hash(self::$_FIRE_HASH_ALGO,$data);
-
+        return $response;
     }
 }
