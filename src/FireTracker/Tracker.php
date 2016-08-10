@@ -104,7 +104,7 @@ class Tracker
      */
     public static function FireEmergency($message = "", $context = "",$_line=__LINE__,$_file=__FILE__,$_function=__FUNCTION__,$_method=__METHOD__,$_class=__CLASS__,$_trait=__TRAIT__,$_ns=__NAMESPACE__,$_dir=__DIR__)
     {
-        self::Fire(self::$_FIRE_LEVEL_EMERGENCY, $message, $context,$_line,$_file,$_function,$_method,$_class,$_trait,$_ns,$_dir);
+        self::Fire(self::$_FIRE_LEVEL_EMERGENCY, $message, $context,$_line,$_file,$_function,$_method,$_class,$_trait,$_ns);
     }
 
     /**
@@ -114,7 +114,7 @@ class Tracker
      */
     public static function FireDebug($message = "", $context = "",$_line=__LINE__,$_file=__FILE__,$_function=__FUNCTION__,$_method=__METHOD__,$_class=__CLASS__,$_trait=__TRAIT__,$_ns=__NAMESPACE__,$_dir=__DIR__)
     {
-        return self::Fire(self::$_FIRE_LEVEL_DEBUG, $message, $context,$_line,$_file,$_function,$_method,$_class,$_trait,$_ns,$_dir);
+        return self::Fire(self::$_FIRE_LEVEL_DEBUG, $message, $context,$_line,$_file,$_function,$_method,$_class,$_trait,$_ns);
     }
 
     /**
@@ -124,7 +124,7 @@ class Tracker
      */
     public static function FireInfo($message = "", $context = "",$_line=__LINE__,$_file=__FILE__,$_function=__FUNCTION__,$_method=__METHOD__,$_class=__CLASS__,$_trait=__TRAIT__,$_ns=__NAMESPACE__,$_dir=__DIR__)
     {
-        return self::Fire(self::$_FIRE_LEVEL_INFO, $message, $context,$_line,$_file,$_function,$_method,$_class,$_trait,$_ns,$_dir);
+        return self::Fire(self::$_FIRE_LEVEL_INFO, $message, $context,$_line,$_file,$_function,$_method,$_class,$_trait,$_ns);
     }
 
     /**
@@ -134,7 +134,7 @@ class Tracker
      */
     public static function FireNotice($message = "", $context = "",$_line=__LINE__,$_file=__FILE__,$_function=__FUNCTION__,$_method=__METHOD__,$_class=__CLASS__,$_trait=__TRAIT__,$_ns=__NAMESPACE__,$_dir=__DIR__)
     {
-        return self::Fire(self::$_FIRE_LEVEL_NOTICE, $message, $context,$_line,$_file,$_function,$_method,$_class,$_trait,$_ns,$_dir);
+        return self::Fire(self::$_FIRE_LEVEL_NOTICE, $message, $context,$_line,$_file,$_function,$_method,$_class,$_trait,$_ns);
     }
 
     /**
@@ -144,7 +144,7 @@ class Tracker
      */
     public static function FireWarning($message = "", $context = "",$_line=__LINE__,$_file=__FILE__,$_function=__FUNCTION__,$_method=__METHOD__,$_class=__CLASS__,$_trait=__TRAIT__,$_ns=__NAMESPACE__,$_dir=__DIR__)
     {
-        return self::Fire(self::$_FIRE_LEVEL_WARNING, $message, $context,$_line,$_file,$_function,$_method,$_class,$_trait,$_ns,$_dir);
+        return self::Fire(self::$_FIRE_LEVEL_WARNING, $message, $context,$_line,$_file,$_function,$_method,$_class,$_trait,$_ns);
     }
 
     /**
@@ -154,7 +154,7 @@ class Tracker
      */
     public static function FireError($message = "", $context = "",$_line=__LINE__,$_file=__FILE__,$_function=__FUNCTION__,$_method=__METHOD__,$_class=__CLASS__,$_trait=__TRAIT__,$_ns=__NAMESPACE__,$_dir=__DIR__)
     {
-        return self::Fire(self::$_FIRE_LEVEL_ERROR, $message, $context,$_line,$_file,$_function,$_method,$_class,$_trait,$_ns,$_dir);
+        return self::Fire(self::$_FIRE_LEVEL_ERROR, $message, $context,$_line,$_file,$_function,$_method,$_class,$_trait,$_ns);
     }
 
     /**
@@ -164,7 +164,7 @@ class Tracker
      */
     public static function FireAlert($message = "", $context = "",$_line=__LINE__,$_file=__FILE__,$_function=__FUNCTION__,$_method=__METHOD__,$_class=__CLASS__,$_trait=__TRAIT__,$_ns=__NAMESPACE__,$_dir=__DIR__)
     {
-        return self::Fire(self::$_FIRE_LEVEL_ALERT, $message, ,$_line,$_file,$_function,$_method,$_class,$_trait,$_ns,$_dir);
+        return self::Fire(self::$_FIRE_LEVEL_ALERT, $message, ,$_line,$_file,$_function,$_method,$_class,$_trait,$_ns);
     }
 
     /**
@@ -174,7 +174,7 @@ class Tracker
      */
     public static function FireCritical($message = "", $context = "",$_line=__LINE__,$_file=__FILE__,$_function=__FUNCTION__,$_method=__METHOD__,$_class=__CLASS__,$_trait=__TRAIT__,$_ns=__NAMESPACE__,$_dir=__DIR__)
     {
-        return self::Fire(self::$_FIRE_LEVEL_CRITICAL, $message, $context,$_line,$_file,$_function,$_method,$_class,$_trait,$_ns,$_dir);
+        return self::Fire(self::$_FIRE_LEVEL_CRITICAL, $message, $context,$_line,$_file,$_function,$_method,$_class,$_trait,$_ns);
     }
 
     protected static function fireHash($query){
@@ -195,7 +195,7 @@ class Tracker
         $data.=(isset($query[self::$_FIRE_INPUT_LINE]))?$query[self::$_FIRE_INPUT_LINE]:"$";
         $data.=(isset($query[self::$_FIRE_INPUT_FILE]))?$query[self::$_FIRE_INPUT_FILE]:"$";
         $data.=(isset($query[self::$_FIRE_INPUT_FUNCTION]))?$query[self::$_FIRE_INPUT_FUNCTION]:"$";
-        $data.=(isset($query[self::$_FIRE_INPUT_METHOD]))?$query[self::$_FIRE_INPUT_METHOD]:"$";
+        $data.=(isset($query[self::$_FIRE_INPUT_METHODE]))?$query[self::$_FIRE_INPUT_METHODE]:"$";
         $data.=(isset($query[self::$_FIRE_INPUT_CLASS]))?$query[self::$_FIRE_INPUT_CLASS]:"$";
         $data.=(isset($query[self::$_FIRE_INPUT_TRAIT]))?$query[self::$_FIRE_INPUT_TRAIT]:"$";
         $data.=(isset($query[self::$_FIRE_INPUT_NAMESPACE]))?$query[self::$_FIRE_INPUT_NAMESPACE]:"$";
