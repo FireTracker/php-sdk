@@ -98,7 +98,9 @@ class Tracker
     {
         self::Fire(self::$_FIRE_LEVEL_EMERGENCY, $message, $context);
     }
-
+    /**
+     * @param Exception $x
+     */
     public static function FireEmergency(Exception $x)
     {
         self::Fire(self::$_FIRE_LEVEL_EMERGENCY, $x);
