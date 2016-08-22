@@ -70,12 +70,12 @@ class Tracker
 
     /**
      * Main function to fire logs
-     * @param $level
+     * @param string $level
      * @param string $message
      * @param string $context
      * @return mixed
      */
-    public static function Fire($level, $message = "", $context = "")
+    public static function Fire($level, $message , $context )
     {
         $headers = array('Accept' => 'application/json');
         $query=self::_fire($level,$message, $context);
@@ -83,8 +83,10 @@ class Tracker
     }
     /**
     * Fire Log With Exception
+    * @param string $level
+    * @param Exception $x
     */
-    public static function Fire($level,Exception $x){
+    public static function FireException($level,\Exception $x){
       $headers = array('Accept' => 'application/json');
       $query=self::_fire($level,$x->getMessage(),$x->__toString());
       return Request::post(self::$_FIRE_ENDPOINT, $headers, $query);
@@ -94,16 +96,16 @@ class Tracker
      * @param string $message
      * @param string $context
      */
-    public static function FireEmergency($message = "", $context = "")
+    public static function FireEmergency($message, $context )
     {
         self::Fire(self::$_FIRE_LEVEL_EMERGENCY, $message, $context);
     }
     /**
      * @param Exception $x
      */
-    public static function FireEmergency(Exception $x)
+    public static function FireEmergencyException(\Exception $x)
     {
-        self::Fire(self::$_FIRE_LEVEL_EMERGENCY, $x);
+        self::FireException(self::$_FIRE_LEVEL_EMERGENCY, $x);
     }
 
     /**
@@ -111,42 +113,48 @@ class Tracker
      * @param string $context
      * @return mixed
      */
-    public static function FireDebug($message = "", $context = "")
+    public static function FireDebug($message, $context )
     {
         return self::Fire(self::$_FIRE_LEVEL_DEBUG, $message, $context);
     }
-
-    public static function FireDebug(Exception $x)
+    /**
+     * @param Exception $x
+     */
+    public static function FireDebugException(\Exception $x)
     {
-        return self::Fire(self::$_FIRE_LEVEL_DEBUG, $x);
+        return self::FireException(self::$_FIRE_LEVEL_DEBUG, $x);
     }
     /**
      * @param string $message
      * @param string $context
      * @return mixed
      */
-    public static function FireInfo($message = "", $context = "")
+    public static function FireInfo($message, $context)
     {
         return self::Fire(self::$_FIRE_LEVEL_INFO, $message, $context);
     }
-
-    public static function FireInfo(Exception $x)
+    /**
+     * @param Exception $x
+     */
+    public static function FireInfoException(\Exception $x)
     {
-        return self::Fire(self::$_FIRE_LEVEL_INFO, $x);
+        return self::FireException(self::$_FIRE_LEVEL_INFO, $x);
     }
     /**
      * @param string $message
      * @param string $context
      * @return mixed
      */
-    public static function FireNotice($message = "", $context = "")
+    public static function FireNotice($message , $context)
     {
         return self::Fire(self::$_FIRE_LEVEL_NOTICE, $message, $context);
     }
-
-    public static function FireNotice(Exception $x)
+    /**
+     * @param Exception $x
+     */
+    public static function FireNoticeException(\Exception $x)
     {
-        return self::Fire(self::$_FIRE_LEVEL_NOTICE, $x);
+        return self::FireException(self::$_FIRE_LEVEL_NOTICE, $x);
     }
 
     /**
@@ -154,14 +162,16 @@ class Tracker
      * @param string $context
      * @return mixed
      */
-    public static function FireWarning($message = "", $context = "")
+    public static function FireWarning($message , $context)
     {
         return self::Fire(self::$_FIRE_LEVEL_WARNING, $message, $context);
     }
-
-    public static function FireWarning(Exception $x)
+    /**
+     * @param Exception $x
+     */
+    public static function FireWarningException(\Exception $x)
     {
-        return self::Fire(self::$_FIRE_LEVEL_WARNING, $x);
+        return self::FireException(self::$_FIRE_LEVEL_WARNING, $x);
     }
 
     /**
@@ -169,14 +179,16 @@ class Tracker
      * @param string $context
      * @return mixed
      */
-    public static function FireError($message = "", $context = "")
+    public static function FireError($message, $context )
     {
         return self::Fire(self::$_FIRE_LEVEL_ERROR, $message, $context);
     }
-
-    public static function FireError(Exception $x)
+    /**
+     * @param Exception $x
+     */
+    public static function FireErrorException(\Exception $x)
     {
-        return self::Fire(self::$_FIRE_LEVEL_ERROR, $x);
+        return self::FireException(self::$_FIRE_LEVEL_ERROR, $x);
     }
 
     /**
@@ -184,14 +196,16 @@ class Tracker
      * @param string $context
      * @return mixed
      */
-    public static function FireAlert($message = "", $context = "")
+    public static function FireAlert($message , $context )
     {
         return self::Fire(self::$_FIRE_LEVEL_ALERT, $message, $context);
     }
-
-    public static function FireAlert(Exception $x)
+    /**
+     * @param Exception $x
+     */
+    public static function FireAlertException(\Exception $x)
     {
-        return self::Fire(self::$_FIRE_LEVEL_ALERT, $x);
+        return self::FireException(self::$_FIRE_LEVEL_ALERT, $x);
     }
 
     /**
@@ -199,16 +213,20 @@ class Tracker
      * @param string $context
      * @return mixed
      */
-    public static function FireCritical($message = "", $context = "")
+    public static function FireCritical($message , $context )
     {
         return self::Fire(self::$_FIRE_LEVEL_CRITICAL, $message, $context);
     }
-
-    public static function FireCritical(Exception $x)
+    /**
+     * @param Exception $x
+     */
+    public static function FireCriticalException(\Exception $x)
     {
-        return self::Fire(self::$_FIRE_LEVEL_CRITICAL, $x);
+        return self::FireException(self::$_FIRE_LEVEL_CRITICAL, $x);
     }
-
+    /**
+     * @param array $query
+     */
     protected static function fireHash($query){
         $userSecret = (isset($GLOBALS[self::$_FIRE_USER_SECRET])) ? $GLOBALS[self::$_FIRE_USER_SECRET] : null;
         $response=false;
@@ -228,6 +246,11 @@ class Tracker
         $response=hash(self::$_FIRE_HASH_ALGO,$data);
         return $response;
     }
+    /**
+     * @param string $level
+     * @param string $message
+     * @param string $context
+     */
     protected static function _fire($level,$message,$context){
       //api auth infos
       $userSecret = (isset($GLOBALS[self::$_FIRE_USER_SECRET])) ? $GLOBALS[self::$_FIRE_USER_SECRET] : null;
